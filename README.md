@@ -10,7 +10,9 @@ Glitchy Guesser - AI-Assisted Interactive Number Guessing Game
 
 Glitchy Guesser is an interactive web-based number guessing game where users attempt to identify a randomly generated hidden number across different difficulty levels. The original version relied purely on rule-based logic for generating numbers, validating guesses, and providing feedback such as “too high” or “too low.”
 
-In the AI-enhanced version, the system goes beyond static game logic by incorporating AI-assisted reasoning to improve feedback clarity, generate more adaptive and user-friendly hints, and better guide the player through the guessing process. This makes the gameplay feel more dynamic and intelligent compared to the original deterministic version. The project demonstrates how AI can augment traditional application logic to create a more engaging user experience using Python and Streamlit.
+In the AI-enhanced version, the system goes beyond static game logic by incorporating AI-assisted reasoning to improve feedback clarity, generate more adaptive and user-friendly hints, and better guide the player through the guessing process. 
+
+This project implements a stateful rule-based agent loop where user input is processed through a sequence of deterministic functions for validation, decision-making, scoring, and feedback generation. The system maintains memory using Streamlit session state, enabling persistent interaction across multiple turns.
 
 ## Architecture Overview
 
@@ -28,9 +30,21 @@ The system is split into two main components:
       - Score tracking (update_score)
       - Input parsing and messaging
 
-**Flow:**
-User Input -> Streamlit UI -> Logic Layer -> Result Returned -> UI Update
+**Data Flow:**
+User Input (guess) -> Streamlit UI (app.py) -> parse_guess() (validates input) -> check_guess() (compares with secret) -> update_score() (adjusts score) -> get_outcome_message() (formats feedback) -> st.session_state (stores updated game state) -> UI renders response back to user
 
+While this project does not use machine learning or large language models, it applies AI-inspired design through a layered architecture implemented across the Streamlit UI and backend logic modules.
+
+1. State management layer (UI – app.py):
+The application maintains persistent game context using st.session_state, tracking variables such as the secret number, attempts, score, game status, and history. This simulates memory-like behavior across user interactions.
+
+2. Decision logic layer (logic_utils.py):
+Core game logic is implemented as stateless functions such as check_guess() and update_score(), which handle deterministic decision-making independently from the UI.
+
+3. Feedback transformation layer (logic_utils.py):
+The function get_outcome_message() converts raw system outputs into structured, human-readable responses, simulating adaptive feedback behavior.
+
+Together, these layers form a simplified agent-style pipeline: user input → state-aware processing → rule-based reasoning → contextual response generation.
 
 ## Setup Instructions
 
@@ -57,21 +71,22 @@ User Input -> Streamlit UI -> Logic Layer -> Result Returned -> UI Update
    - Difficulty: Easy
    - Guess: 42
 - Output: 
-   - "Too low! Try a higher number."
+   - "System anomaly: number is higher than your guess."
 
 2. **Example 2**
 - Input: 
-   - Difficulty: Medium
+   - Difficulty: Normal
    - Guess: 73
 - Output: 
-   - "Too high! Try a lower number."
+   - "Glitch detected: number is lower than your guess."
 
 3. **Example 3**
 - Input: 
    - Difficulty: Hard
    - Guess: 58
 - Output: 
-   - "Correct! You cracked the code 🎉 Score updated."
+   - "Correct! You cracked the system 🎉"
+   - "You won! The secret was 58. Final score: X"
 
 ## Demo
 

@@ -1,4 +1,4 @@
-# Reflection: Game Glitch Investigator
+# Reflection: Glitchy Guesser
 
 ## 1. What are the limitations or biases in your system?
 
