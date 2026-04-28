@@ -16,7 +16,7 @@ This project implements a stateful rule-based agent loop where user input is pro
 
 ## Architecture Overview
 
-<img src="./assets/architecture-diagram.png" title="architecture diagram" width="600" alt="system diagram" />
+<img src="./assets/system-diagram.png" title="architecture diagram" width="600" alt="system diagram" />
 
 The system is split into two main components:
 1. **Frontend (Streamlit UI - app.py)** 
