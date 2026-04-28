@@ -1,4 +1,4 @@
-#  Glitchy Guesser(AI Guessing Game)
+#  Glitchy Guesser (AI Guessing Game)
 
 ## Original Project
 
@@ -35,42 +35,42 @@ User Input -> Streamlit UI -> Logic Layer -> Result Returned -> UI Update
 ## Setup Instructions
 
 1. **Clone the repository** 
-git clone https://github.com/your-username/glitchy-guesser.git
-cd glitchy-guesser
+- git clone https://github.com/your-username/glitchy-guesser.git
+- cd glitchy-guesser
 
 2. **Create virtual environment**
-python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
+- python -m venv venv
+- source venv/bin/activate   # Mac/Linux
+- venv\Scripts\activate      # Windows
 
 3. **Install dependencies**
-pip install streamlit
+- pip install streamlit
 
 4. **Run the application**
-streamlit run app.py
+- streamlit run app.py
 
 
 ## Sample Interactions
 
 1. **Example 1**
-Input: 
+- Input: 
    - Difficulty: Easy
    - Guess: 42
-Output: 
+- Output: 
    - "Too low! Try a higher number."
 
 2. **Example 2**
-Input: 
+- Input: 
    - Difficulty: Medium
    - Guess: 73
-Output: 
+- Output: 
    - "Too high! Try a lower number."
 
 3. **Example 3**
-Input: 
+- Input: 
    - Difficulty: Hard
    - Guess: 58
-Output: 
+- Output: 
    - "Correct! You cracked the code 🎉 Score updated."
 
 ## Demo
