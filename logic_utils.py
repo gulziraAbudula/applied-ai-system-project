@@ -1,84 +1,102 @@
-def get_range_for_difficulty(difficulty: str) -> tuple[int, int]:
-    """Return (low, high) inclusive range for a given difficulty."""
+# logic_utils.py
+
+from typing import Tuple, Union
+
+
+# -----------------------------
+# Difficulty Configuration
+# -----------------------------
+
+def get_range_for_difficulty(difficulty: str) -> Tuple[int, int]:
+    """
+    Returns number range based on difficulty level.
+    """
     if difficulty == "Easy":
-        return 1, 20
-    if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
         return 1, 50
-    return 1, 100
+    elif difficulty == "Normal":
+        return 1, 100
+    elif difficulty == "Hard":
+        return 1, 200
+    else:
+        return 1, 100  # fallback
 
 
-def parse_guess(raw: str | None) -> tuple[bool, int | None, str | None]:
+# -----------------------------
+# Input Parsing
+# -----------------------------
+
+def parse_guess(raw_input: str) -> Tuple[bool, Union[int, None], str]:
     """
-    Parse user input into an int guess.
+    Validates and converts user input into an integer guess.
 
-    Returns: (ok: bool, guess_int: int | None, error_message: str | None)
+    Returns:
+        (is_valid, guess_value, error_message)
     """
-    if raw is None:
-        return False, None, "Enter a guess."
-
-    raw = raw.strip()
-
-    if raw == "":
-        return False, None, "Enter a guess."
+    if raw_input is None or raw_input.strip() == "":
+        return False, None, "Please enter a number."
 
     try:
-        if "." in raw:
-            value = int(float(raw))
-        else:
-            value = int(raw)
-    except (TypeError, ValueError):
-        return False, None, "That is not a number."
+        guess = int(raw_input)
 
-    return True, value, None
+        if guess < 0:
+            return False, None, "Negative numbers are not allowed."
+
+        return True, guess, ""
+
+    except ValueError:
+        return False, None, "Invalid input. Please enter a whole number."
 
 
-def check_guess(guess: int | str, secret: int | str) -> str:
+# -----------------------------
+# Core Game Logic
+# -----------------------------
+
+def check_guess(guess: int, secret: int) -> str:
     """
-    Compare guess to secret and return an outcome string.
-
-    outcome examples: "Win", "Too High", "Too Low", "Invalid"
+    Compares guess with secret number and returns outcome.
     """
-    try:
-        guess_int = int(guess)
-        secret_int = int(secret)
-    except (TypeError, ValueError):
-        return "Invalid"
-
-    if guess_int == secret_int:
+    if guess == secret:
         return "Win"
-
-    if guess_int > secret_int:
+    elif guess > secret:
         return "Too High"
+    else:
+        return "Too Low"
 
-    return "Too Low"
 
-
-def update_score(current_score: int, outcome: str, attempt_number: int) -> int:
-    """Update score based on outcome and attempt number."""
-    if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
-
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
-
-    return current_score
-
+# -----------------------------
+# Feedback Layer (AI-style enhancement point)
+# -----------------------------
 
 def get_outcome_message(outcome: str) -> str:
-    """Map outcome values to user-facing hint messages."""
-    outcome_messages = {
-        "Win": "🎉 Correct!",
-        "Too High": "📉 Go LOWER!",
-        "Too Low": "📈 Go HIGHER!",
-    }
-    return outcome_messages.get(outcome, "Invalid guess comparison.")
+    """
+    Converts raw game outcome into user-friendly message.
+    """
+    if outcome == "Win":
+        return "Correct! You cracked the system 🎉"
+    elif outcome == "Too High":
+        return "Glitch detected: number is lower than your guess."
+    elif outcome == "Too Low":
+        return "System anomaly: number is higher than your guess."
+    else:
+        return "Unknown state detected."
+
+
+# -----------------------------
+# Scoring System
+# -----------------------------
+
+def update_score(current_score: int, outcome: str, attempt_number: int) -> int:
+    """
+    Updates score based on performance.
+
+    Simple scoring logic:
+    - Win early = higher score
+    - Wrong guesses = small penalty scaling with attempts
+    """
+    if outcome == "Win":
+        return current_score + max(10, 50 - (attempt_number * 5))
+
+    elif outcome in ("Too High", "Too Low"):
+        return current_score - 1
+
+    return current_score
