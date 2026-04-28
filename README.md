@@ -1,4 +1,4 @@
-#  Game Glitch Investigator: The Impossible Guesser (AI Guessing Game)
+#  Glitchy Guesser(AI Guessing Game)
 
 ## Original Project
 
@@ -6,7 +6,7 @@ Glitchy Guesser is a number-guessing game built using Python and Streamlit. In i
 
 ## Title & Summary
 
-Game Glitch Investigator: The Impossible Guesser (AI Guessing Game)
+Glitchy Guesser - AI-Assisted Interactive Number Guessing Game
 
 Glitchy Guesser is an interactive web-based number guessing game where users attempt to identify a randomly generated hidden number across different difficulty levels. The original version relied purely on rule-based logic for generating numbers, validating guesses, and providing feedback such as “too high” or “too low.”
 
