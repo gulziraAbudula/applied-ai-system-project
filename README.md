@@ -14,6 +14,8 @@ In the AI-enhanced version, the system goes beyond static game logic by incorpor
 
 ## Architecture Overview
 
+<img src="./assets/system_diagram.png" title="architecture diagram" width="600" alt="system diagram" />
+
 The system is split into two main components:
 1. **Frontend (Streamlit UI - app.py)** 
    - Handles user interaction
@@ -71,6 +73,9 @@ Input:
 Output: 
    - "Correct! You cracked the code 🎉 Score updated."
 
+## Demo
+
+
 ## Design Decisions
 
 - **Separation of Logic and UI:**
@@ -97,4 +102,5 @@ Output:
    - Writing modular Python code improves scalability significantly.
 
 ## Reflection
+
 Through building this project, I learned how to structure a small but complete Python application with a clear separation between UI (Streamlit) and backend logic. Breaking the system into modules like app.py and logic_utils.py helped me understand how decoupling components improves maintainability, testing, and debugging. On the technical side, I also learned how to integrate rule-based logic with AI-assisted components in a controlled way—using AI to enhance user feedback and hints without replacing the deterministic core game engine.
