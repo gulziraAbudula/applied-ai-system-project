@@ -89,7 +89,7 @@ Together, these layers form a simplified agent-style pipeline: user input → st
    - "You won! The secret was 58. Final score: X"
 
 ## Demo
-
+<img src="./assets/app-demo.gif" title="Video Walkthrough" width="600" alt="Video Walkthrough" />
 
 ## Design Decisions
 
