@@ -106,6 +106,10 @@ Together, these layers form a simplified agent-style pipeline: user input → st
 
 ## Testing Summary
 
+- **Test Coverage:**
+   - Total tests: 13
+   - Result: All tests passed successfully
+   - Coverage: Core logic functions (parse_guess, check_guess, update_score, get_outcome_message)
 - **What worked:**
    - Core guessing logic performed correctly across difficulty levels.
    - UI updates correctly reflected backend state.
